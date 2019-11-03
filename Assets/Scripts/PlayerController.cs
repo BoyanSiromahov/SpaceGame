@@ -7,18 +7,18 @@ public class PlayerController : MonoBehaviour
 
     public float acceleration_amount = 1f;
     public float rotation_speed = 1f;
-    public GameObject hull, left, right;
+    public int mass, crew, thrust, energy, cost;
 
     private int boostCd = 0;
-    private int mass, crew, thrust, energy, cost;
+    private GameObject hull, left, right;
     private Rigidbody2D rb;
     private ModuleBase hullStats, leftStats, rightStats;
     // Use this for initialization
     void Start()
     {
-        hull = this.transform.GetChild(0).gameObject;
-        left = this.transform.GetChild(1).gameObject;
-        right = this.transform.GetChild(2).gameObject;
+        hull = this.transform.Find("hull_prefab").gameObject;
+        left = this.transform.Find("left_prefab").gameObject;
+        right = this.transform.Find("right_prefab").gameObject;
         rb = GetComponent<Rigidbody2D>();
         hullStats = hull.GetComponent<ModuleBase>();
         leftStats = left.GetComponent<ModuleBase>();
@@ -32,69 +32,33 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            
-        }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SpriteRenderer sr = left.GetComponent<SpriteRenderer>();
-            Sprite sp = Resources.Load<Sprite>("Sprites/Ships/Modules/leftB");
-            sr.sprite = sp;
-
-            Sprite spt = Resources.Load<Sprite>("Sprites/Ships/Turrets/Turret Large 1");
-            GameObject tur = GameObject.Find("Turret Large 2");
-            SpriteRenderer ts = tur.GetComponent<SpriteRenderer>();
-            ts.sprite = spt;
-            PlayerControlledTurret tscript = tur.GetComponent<PlayerControlledTurret>();
-            tscript.barrel_hardpoints.RemoveAt(1);
-            Destroy(tscript.barrel_hardpoints[1].gameObject);
+            GameObject newHull = (GameObject)Instantiate(Resources.Load("Prefabs/hull2_prefab"), hull.transform.parent);
+            newHull.transform.parent = hull.transform.parent;
+            GameObject.DestroyImmediate(hull);
+            hull = newHull;
+            hull.transform.name = "hull_prefab";
+            Object newtur = Resources.Load("Prefabs/t_small");
+            hull.GetComponent<ModuleBase>().populateHardpoint(newtur, 0);
+            hull.GetComponent<ModuleBase>().populateHardpoint(newtur, 1);
         }
-        if (Input.GetKey(KeyCode.W)) //CHANGE TO USE THE PRESETS
-        {
-            rb.AddForce(transform.up * acceleration_amount * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce((-transform.up) * acceleration_amount * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.LeftShift))
-        {
-           rb.AddTorque(-rotation_speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.LeftShift))
-        {
-            rb.AddTorque(rotation_speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.C))
+        // rb.AddForce((-transform.up) * acceleration_amount * Time.deltaTime);
+        rb.AddForce(transform.up * Input.GetAxis("Vertical") * acceleration_amount * Time.deltaTime);
+        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * acceleration_amount * Time.deltaTime);
+        rb.AddTorque(-Input.GetAxis("Yaw") * 100 * Time.deltaTime);
+        if (Input.GetButton("Break"))
         {
            rb.angularVelocity = Mathf.Lerp(GetComponent<Rigidbody2D>().angularVelocity, 0, rotation_speed * 0.06f * Time.deltaTime);
            rb.velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, acceleration_amount * 0.06f * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetButton("Reset"))
         {
             transform.position = new Vector3(0, 0, 0);
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().angularVelocity = 0;
         }
-        if (Input.GetKey(KeyCode.E))
-        {
-            rb.AddForce(transform.right * acceleration_amount * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            rb.AddForce(-transform.right * acceleration_amount * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Boost"))
         {
             if (boostCd > 0)
             {

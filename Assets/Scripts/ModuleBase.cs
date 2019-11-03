@@ -9,10 +9,22 @@ public class ModuleBase : MonoBehaviour
     public int thrust;
     public int energyCost;
     public int cost;
+    public List<GameObject> hardpoints = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void populateHardpoint(Object tur, int pos)
+    {
+        Debug.Log(hardpoints[pos].transform.position);
+        GameObject newTur = Instantiate(tur, hardpoints[pos].transform.position, hardpoints[pos].transform.rotation, hardpoints[pos].transform.parent) as GameObject;
+        if (hardpoints[pos] == null)
+            hardpoints.Insert(pos, newTur);
+        newTur.transform.parent = hardpoints[pos].transform.parent;
+        GameObject.DestroyImmediate(hardpoints[pos]);
+        hardpoints[pos] = newTur;
     }
 }

@@ -68,13 +68,13 @@
     <Compile Include="Assets\2D Space Kit\Scripts\CustomPointer.cs" />
     <Compile Include="Assets\2D Space Kit\Scripts\ExampleShipControl.cs" />
     <Compile Include="Assets\2D Space Kit\Scripts\ParallaxLayer.cs" />
-    <Compile Include="Assets\2D Space Kit\Scripts\PlayerControlledTurret.cs" />
     <Compile Include="Assets\2D Space Kit\Scripts\Projectile.cs" />
     <Compile Include="Assets\2D Space Kit\Scripts\PSDestroy.cs" />
     <Compile Include="Assets\2D Space Kit\Scripts\ShipCamera.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Invnetory.cs" />
     <Compile Include="Assets\Scripts\ModuleBase.cs" />
+    <Compile Include="Assets\Scripts\PlayerControlledTurret.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <None Include="Assets\2D Space Kit\Scripts\WARNING.txt" />
     <None Include="Assets\2D Space Kit\Backgrounds\Background Tip.txt" />

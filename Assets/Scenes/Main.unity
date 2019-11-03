@@ -295,9 +295,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration_amount: 64
   rotation_speed: 64
-  hull: {fileID: 0}
-  left: {fileID: 0}
-  right: {fileID: 0}
+  mass: 0
+  crew: 0
+  thrust: 0
+  energy: 0
+  cost: 0
 --- !u!50 &958407103
 Rigidbody2D:
   serializedVersion: 4
