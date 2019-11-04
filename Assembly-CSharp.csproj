@@ -74,8 +74,8 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Invnetory.cs" />
     <Compile Include="Assets\Scripts\ModuleBase.cs" />
-    <Compile Include="Assets\Scripts\PlayerControlledTurret.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\TurretConroller.cs" />
     <None Include="Assets\2D Space Kit\Scripts\WARNING.txt" />
     <None Include="Assets\2D Space Kit\Backgrounds\Background Tip.txt" />
     <None Include="Assets\2D Space Kit\Ships and Stations\Rendering Tip.txt" />

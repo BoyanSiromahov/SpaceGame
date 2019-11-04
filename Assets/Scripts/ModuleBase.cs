@@ -14,7 +14,7 @@ public class ModuleBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        updateStats();
     }
 
     public void populateHardpoint(Object tur, int pos)
@@ -26,5 +26,22 @@ public class ModuleBase : MonoBehaviour
         newTur.transform.parent = hardpoints[pos].transform.parent;
         GameObject.DestroyImmediate(hardpoints[pos]);
         hardpoints[pos] = newTur;
+    }
+
+    public void updateStats()
+    {
+        foreach (Transform child in transform)
+        {
+            ModuleBase modScript = child.GetComponent<ModuleBase>();
+            if (modScript)
+            {
+                this.mass += modScript.mass;
+                this.crew += modScript.crew;
+                this.thrust += modScript.thrust;
+                this.energyCost += modScript.energyCost;
+                this.cost += modScript.cost;
+            }
+        }
+
     }
 }

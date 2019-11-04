@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3b7e69a61092f43baf4ae40fc2e06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 0
+  mass: 30
   crew: 0
-  thrust: 0
+  thrust: 10
   energyCost: 0
   cost: 0
   hardpoints:

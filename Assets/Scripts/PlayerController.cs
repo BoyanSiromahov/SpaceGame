@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         crew = hullStats.crew + leftStats.crew + rightStats.crew;
         thrust = hullStats.thrust + leftStats.thrust + rightStats.thrust;
         energy = hullStats.energyCost + leftStats.energyCost + rightStats.energyCost;
+        updateStats();
     }
 
     // Update is called once per frame
@@ -42,15 +43,19 @@ public class PlayerController : MonoBehaviour
             Object newtur = Resources.Load("Prefabs/t_small");
             hull.GetComponent<ModuleBase>().populateHardpoint(newtur, 0);
             hull.GetComponent<ModuleBase>().populateHardpoint(newtur, 1);
+            updateStats();
         }
-        // rb.AddForce((-transform.up) * acceleration_amount * Time.deltaTime);
-        rb.AddForce(transform.up * Input.GetAxis("Vertical") * acceleration_amount * Time.deltaTime);
-        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * acceleration_amount * Time.deltaTime);
-        rb.AddTorque(-Input.GetAxis("Yaw") * 100 * Time.deltaTime);
+        if (thrust < 1)
+        {
+            thrust = 1;
+        }
+        rb.AddForce(transform.up * Input.GetAxis("Vertical") * acceleration_amount * thrust * Time.deltaTime);
+        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * acceleration_amount * thrust * Time.deltaTime);
+        rb.AddTorque(-Input.GetAxis("Yaw") * 100  * Time.deltaTime);
         if (Input.GetButton("Break"))
         {
-           rb.angularVelocity = Mathf.Lerp(GetComponent<Rigidbody2D>().angularVelocity, 0, rotation_speed * 0.06f * Time.deltaTime);
-           rb.velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, acceleration_amount * 0.06f * Time.deltaTime);
+           rb.angularVelocity = Mathf.Lerp(GetComponent<Rigidbody2D>().angularVelocity, 0, rotation_speed * thrust * 0.06f * Time.deltaTime);
+           rb.velocity = Vector2.Lerp(GetComponent<Rigidbody2D>().velocity, Vector2.zero, acceleration_amount * thrust * 0.06f * Time.deltaTime);
         }
         if (Input.GetButton("Reset"))
         {
@@ -71,6 +76,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+    }
+
+    public void updateStats()
+    {
+        mass = 0;
+        crew = 0;
+        thrust = 0;
+        energy = 0;
+        cost = 0;
+        foreach (Transform child in transform)
+        {
+            var cs = child.GetComponent<ModuleBase>();
+            mass += cs.mass;
+            crew += cs.crew;
+            thrust += cs.thrust;
+            energy += cs.energyCost;
+            cost += cs.cost;
+        }
+        GetComponent<Rigidbody2D>().mass = this.mass;
 
     }
 }
