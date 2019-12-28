@@ -7,6 +7,9 @@ public class ModuleBase : MonoBehaviour
     public int mass;
     public int crew;
     public int thrust;
+    public int shieldHP;
+    public int armorHP;
+    public int hullHP;
     public int energyCost;
     public int cost;
     public List<GameObject> hardpoints = new List<GameObject>();

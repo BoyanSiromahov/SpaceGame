@@ -95,6 +95,9 @@ MonoBehaviour:
   mass: 1
   crew: 0
   thrust: 0
+  shieldHP: 100
+  armorHP: 0
+  hullHP: 0
   energyCost: 0
   cost: 0
   hardpoints: []

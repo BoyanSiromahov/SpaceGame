@@ -8,14 +8,21 @@ public class PlayerController : MonoBehaviour
     public float acceleration_amount = 1f;
     public float rotation_speed = 1f;
     public int mass, crew, thrust, energy, cost;
+    public float shieldHP = 0;
+    public float armorHP = 0;
+    public float hullHP = 0; 
 
     private int boostCd = 0;
     private GameObject hull, left, right;
     private Rigidbody2D rb;
     private ModuleBase hullStats, leftStats, rightStats;
+
+    public GameObject hpm;
+    private hpHandler hph;
     // Use this for initialization
     void Start()
     {
+        hph = hpm.GetComponent<hpHandler>();
         hull = this.transform.Find("hull_prefab").gameObject;
         left = this.transform.Find("left_prefab").gameObject;
         right = this.transform.Find("right_prefab").gameObject;
@@ -27,12 +34,25 @@ public class PlayerController : MonoBehaviour
         crew = hullStats.crew + leftStats.crew + rightStats.crew;
         thrust = hullStats.thrust + leftStats.thrust + rightStats.thrust;
         energy = hullStats.energyCost + leftStats.energyCost + rightStats.energyCost;
+
+        shieldHP = hullStats.shieldHP + leftStats.shieldHP + rightStats.shieldHP;
+        armorHP = hullStats.armorHP + leftStats.armorHP + rightStats.armorHP;
+        hullHP = hullStats.hullHP + leftStats.hullHP + rightStats.hullHP;
         updateStats();
+
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            hph.takeDamage(10);
+        }
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             GameObject newHull = (GameObject)Instantiate(Resources.Load("Prefabs/hull2_prefab"), hull.transform.parent);
@@ -86,16 +106,37 @@ public class PlayerController : MonoBehaviour
         thrust = 0;
         energy = 0;
         cost = 0;
+        shieldHP = 0;
+        armorHP = 0;
+        hullHP = 0;
         foreach (Transform child in transform)
         {
-            var cs = child.GetComponent<ModuleBase>();
-            mass += cs.mass;
-            crew += cs.crew;
-            thrust += cs.thrust;
-            energy += cs.energyCost;
-            cost += cs.cost;
+            var mb = child.GetComponent<ModuleBase>();
+            mass += mb.mass;
+            crew += mb.crew;
+            thrust += mb.thrust;
+            energy += mb.energyCost;
+            cost += mb.cost;
+            shieldHP += mb.shieldHP;
+            armorHP += mb.armorHP;
+            hullHP += mb.hullHP;
         }
         GetComponent<Rigidbody2D>().mass = this.mass;
+        hph.updateStats(shieldHP, armorHP, hullHP);
+    }
 
+    public float getShield()
+    {
+        return shieldHP;
+    }
+
+    public float getArmor()
+    {
+        return armorHP;
+    }
+
+    public float getHull()
+    {
+        return hullHP;
     }
 }

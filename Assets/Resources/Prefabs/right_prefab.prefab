@@ -96,6 +96,9 @@ MonoBehaviour:
   mass: 0
   crew: 0
   thrust: 1
+  shieldHP: 0
+  armorHP: 0
+  hullHP: 100
   energyCost: 0
   cost: 0
   hardpoints: []
@@ -106,11 +109,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2861460224663167921}
     m_Modifications:
-    - target: {fileID: 5920767015554117978, guid: e9b289a617d256e4eb6f9e2717e9511c,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret Large 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4578249285862592298, guid: e9b289a617d256e4eb6f9e2717e9511c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -165,6 +163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920767015554117978, guid: e9b289a617d256e4eb6f9e2717e9511c,
+        type: 3}
+      propertyPath: m_Name
+      value: Turret Large 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b289a617d256e4eb6f9e2717e9511c, type: 3}
