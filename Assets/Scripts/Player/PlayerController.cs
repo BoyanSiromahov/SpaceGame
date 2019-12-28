@@ -50,7 +50,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            hph.takeDamage(10);
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                hph.healShields(15);
+            }
+            else
+            {
+                hph.takeDamage(10);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.T))

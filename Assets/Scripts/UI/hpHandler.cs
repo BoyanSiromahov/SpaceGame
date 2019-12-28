@@ -20,9 +20,9 @@ public class hpHandler : MonoBehaviour
         st = this.gameObject.transform.GetChild(0);
         at = this.gameObject.transform.GetChild(1);
         ht = this.gameObject.transform.GetChild(2);
-        sAmount = this.gameObject.transform.GetChild(6).GetComponent<Text>();
-        aAmount = this.gameObject.transform.GetChild(7).GetComponent<Text>();
-        hAmount = this.gameObject.transform.GetChild(8).GetComponent<Text>();
+        sAmount = this.gameObject.transform.GetChild(3).GetComponent<Text>();
+        aAmount = this.gameObject.transform.GetChild(4).GetComponent<Text>();
+        hAmount = this.gameObject.transform.GetChild(5).GetComponent<Text>();
     }
 
     public void updateStats(float shield, float armor, float hull)
