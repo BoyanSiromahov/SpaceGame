@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         leftStats = left.GetComponent<ModuleBase>();
         rightStats = right.GetComponent<ModuleBase>();
         mass = hullStats.mass + leftStats.mass + rightStats.mass;
-        crew = hullStats.crew + leftStats.crew + rightStats.crew;
         thrust = hullStats.thrust + leftStats.thrust + rightStats.thrust;
         energy = hullStats.energyCost + leftStats.energyCost + rightStats.energyCost;
 
@@ -120,7 +119,6 @@ public class PlayerController : MonoBehaviour
         {
             var mb = child.GetComponent<ModuleBase>();
             mass += mb.mass;
-            crew += mb.crew;
             thrust += mb.thrust;
             energy += mb.energyCost;
             cost += mb.cost;

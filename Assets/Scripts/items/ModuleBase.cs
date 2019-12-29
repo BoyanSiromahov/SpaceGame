@@ -5,7 +5,6 @@ using UnityEngine;
 public class ModuleBase : MonoBehaviour
 {
     public int mass;
-    public int crew;
     public int thrust;
     public int shieldHP;
     public int armorHP;
@@ -39,7 +38,6 @@ public class ModuleBase : MonoBehaviour
             if (modScript)
             {
                 this.mass += modScript.mass;
-                this.crew += modScript.crew;
                 this.thrust += modScript.thrust;
                 this.energyCost += modScript.energyCost;
                 this.cost += modScript.cost;
