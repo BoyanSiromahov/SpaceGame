@@ -30,6 +30,19 @@ public class MenuHandler : MonoBehaviour
         {
             toggleFitting();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //disableALL()
+            if (inventoryEnabled)
+            {
+                toggleInventory();
+            }
+            else if(fittingEnabled)
+            {
+                toggleFitting();
+            }
+        }
     }
 
     public void disableAll()
