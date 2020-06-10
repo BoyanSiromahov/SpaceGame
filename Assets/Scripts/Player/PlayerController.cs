@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private ModuleBase hullStats, leftStats, rightStats;
 
+    public PlayerState playerState;
     public GameObject hpm;
     private hpHandler hph;
     // Use this for initialization
@@ -38,10 +39,6 @@ public class PlayerController : MonoBehaviour
         armorHP = hullStats.armorHP + leftStats.armorHP + rightStats.armorHP;
         hullHP = hullStats.hullHP + leftStats.hullHP + rightStats.hullHP;
         updateStats();
-
-
-
-
     }
 
     // Update is called once per frame
@@ -143,5 +140,33 @@ public class PlayerController : MonoBehaviour
     public float getHull()
     {
         return hullHP;
+    }
+
+  //  public PlayerStatistics LocalCopyOfData;
+  //  public bool IsSceneBeingLoaded = false;
+
+    public void SaveData()
+    {
+     //   if (!Directory.Exists("Saves"))
+     //       Directory.CreateDirectory("Saves");
+
+     //   BinaryFormatter formatter = new BinaryFormatter();
+     //   FileStream saveFile = File.Create("Saves/save.binary");
+
+     //   LocalCopyOfData = PlayerState.Instance.localPlayerData;
+
+     //   formatter.Serialize(saveFile, LocalCopyOfData);
+
+     //   saveFile.Close();
+    }
+
+    public void LoadData()
+    {
+       // BinaryFormatter formatter = new BinaryFormatter();
+      //  FileStream saveFile = File.Open("Saves/save.binary", FileMode.Open);
+
+      //  LocalCopyOfData = (PlayerStatistics)formatter.Deserialize(saveFile);
+
+      //  saveFile.Close();
     }
 }
