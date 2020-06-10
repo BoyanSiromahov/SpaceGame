@@ -24,11 +24,13 @@ public class MenuHandler : MonoBehaviour
         if (Input.GetButtonDown("Inventory"))
         {
             toggleInventory();
+            //TODO stop game or stop firing
         }
 
         if (Input.GetButtonDown("Fitting"))
         {
             toggleFitting();
+            //TODO stop game or stop firing
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
